@@ -10,6 +10,7 @@
     "test": "vitest"
   },
   "devDependencies": {
+    "happy-dom": "^13.8.6",
     "vite": "^5.1.6",
     "vitest": "^1.4.0"
   }
