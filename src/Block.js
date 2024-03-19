@@ -5,6 +5,15 @@ export default class Block {
 		this.value = Math.random() > 0.5 ? 2 : 4
 		this.element.textContent = `${this.value}`
 		gridElement.append(this.element)
+		this.x = null
+		this.y = null
 	}
 
+	setPosition(x, y) {
+		this.x = x
+		this.y = y
+
+		this.element.style.setProperty('--x', x)
+		this.element.style.setProperty('--y', y)
+	}
 }
