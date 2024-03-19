@@ -1,4 +1,5 @@
 import Cell from "./Cell.js";
+import Block from "./Block.js";
 
 export default class GameBoard {
 	constructor(boardElement) {
@@ -11,11 +12,17 @@ export default class GameBoard {
 				this.cells.push(new Cell(this.element, i, j))
 			}
 		}
+
+		this.addBlock()
 	}
 
 	getRandomEmptyCell() {
 		const emptyCells = this.cells.filter(cell => cell.isEmpty())
 		const randNum = Math.floor(Math.random() * emptyCells.length)
 		return emptyCells[randNum]
+	}
+
+	addBlock() {
+		this.getRandomEmptyCell().linkBlock(new Block(this.element))
 	}
 }
