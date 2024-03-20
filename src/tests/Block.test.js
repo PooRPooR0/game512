@@ -19,4 +19,9 @@ describe("Block", () => {
 		expect(block.x).toBe(1)
 		expect(block.y).toBe(2)
 	})
+	test("setValue", () => {
+		block.setValue(16)
+		expect(block.value).toBe(16)
+		expect(block.element.textContent).toBe('16')
+	})
 })

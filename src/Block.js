@@ -17,4 +17,8 @@ export default class Block {
 		this.element.style.setProperty('--x', x)
 		this.element.style.setProperty('--y', y)
 	}
+
+	setValue(value){
+
+	}
 }
