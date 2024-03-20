@@ -2,9 +2,7 @@ export default class Block {
 	constructor(gridElement) {
 		this.element = document.createElement("div")
 		this.element.classList.add('block')
-		this.value = Math.random() > 0.5 ? 2 : 4
-		this.element.style.setProperty('--bright', 100 - Math.log2(+this.value) * 4.5)
-		this.element.textContent = `${this.value}`
+		this.setValue(Math.random() > 0.5 ? 2 : 4)
 		gridElement.append(this.element)
 		this.x = null
 		this.y = null
@@ -19,6 +17,8 @@ export default class Block {
 	}
 
 	setValue(value){
-
+		this.value = value
+		this.element.textContent = `${this.value}`
+		this.element.style.setProperty('--bright', 100 - Math.log2(+this.value) * 4.5)
 	}
 }
