@@ -1,11 +1,12 @@
 html, body {
     padding: 0;
     margin: 0;
+    font-family: Consolas, sans-serif;
 }
 
 html {
-    --cellSize: 80px;
-    --cellGap: 8px;
+    --cellSize: 120px;
+    --cellGap: 12px;
 }
 
 body {
@@ -39,10 +40,22 @@ body {
 .block {
     --x: 0;
     --y: 0;
+    --bright: 0;
     position: absolute;
     width: var(--cellSize);
     height: var(--cellSize);
+    box-sizing: border-box;
+    background-color: hsl(196 100% var(--bright));
 
     top: calc(var(--y) * (var(--cellSize) + var(--cellGap)));
     left: calc(var(--x) * (var(--cellSize) + var(--cellGap)));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #1a1a1a;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 28px;
+    color: #1a1a1a;
+    transition: 0.2s ease-in-out;
 }

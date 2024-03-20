@@ -3,6 +3,7 @@ export default class Block {
 		this.element = document.createElement("div")
 		this.element.classList.add('block')
 		this.value = Math.random() > 0.5 ? 2 : 4
+		this.element.style.setProperty('--bright', 100 - Math.log2(+this.value) * 4.5)
 		this.element.textContent = `${this.value}`
 		gridElement.append(this.element)
 		this.x = null
