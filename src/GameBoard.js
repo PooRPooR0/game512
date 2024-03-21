@@ -6,6 +6,7 @@ export default class GameBoard {
 		this.element = boardElement;
 		this.element.classList.add('board')
 		this.cells = []
+		this.bindedHandler = this.handleKeyDown.bind(this)
 
 		for (let i = 0; i < 4; i++) {
 			for (let j = 0; j < 4; j++) {
@@ -15,21 +16,26 @@ export default class GameBoard {
 
 		this.addBlock()
 
-		document.addEventListener('keydown', (event) => {
-			console.log(event.key)
-			if (event.key === 'ArrowRight') {
-				this.moveRight()
-			}
-			if (event.key === 'ArrowLeft') {
-				this.moveLeft()
-			}
-			if (event.key === 'ArrowUp') {
-				this.moveTop()
-			}
-			if (event.key === 'ArrowDown') {
-				this.moveBottom()
-			}
-		})
+		document.addEventListener('keydown', this.bindedHandler)
+	}
+
+	handleKeyDown(event) {
+		document.removeEventListener('keydown', this.bindedHandler)
+		setTimeout(() => {
+			document.addEventListener('keydown', this.bindedHandler)
+		}, 40)
+		if (event.key === 'ArrowRight') {
+			this.moveRight()
+		}
+		if (event.key === 'ArrowLeft') {
+			this.moveLeft()
+		}
+		if (event.key === 'ArrowUp') {
+			this.moveTop()
+		}
+		if (event.key === 'ArrowDown') {
+			this.moveBottom()
+		}
 	}
 
 	getRandomEmptyCell() {
