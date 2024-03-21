@@ -59,4 +59,48 @@ describe("GameBoard", () => {
 		expect(board.cells[2].isEmpty()).toBe(false)
 		expect(board.cells[3].isEmpty()).toBe(false)
 	})
+
+	// move left tests
+
+	// [0, 0, 0, 4] -> [4, 0, 0, 0]
+	test("move left base", () => {
+		const blockToMove = board.cells[0].linkedBlock
+		board.cells[3].linkBlock(blockToMove)
+		board.cells[0].disconnectBlock()
+
+		expect(board.cells[3].isEmpty()).toBe(false)
+		board.moveLeft()
+		expect(board.cells[3].isEmpty()).toBe(true)
+		expect(board.cells[0].isEmpty()).toBe(false)
+	})
+
+	// [4, 0, 0, 4] -> [8, 0, 0, 0]
+	test("move left merge", () => {
+		const blockToMove = board.cells[0].linkedBlock
+		board.cells[3].linkBlock(blockToMove)
+		board.cells[0].disconnectBlock()
+
+		board.addBlock()
+		board.moveLeft()
+
+		expect(board.cells[0].isEmpty()).toBe(false)
+		expect(board.cells[3].isEmpty()).toBe(true)
+		expect(board.cells[0].linkedBlock.value).toBe(8)
+	})
+
+	// [0, 0, 4, 2] -> [4, 2, 0, 0]
+	test("move left several", () => {
+		const blockToMove = board.cells[0].linkedBlock
+		board.cells[2].linkBlock(blockToMove)
+		board.cells[0].disconnectBlock()
+
+		spy.mockImplementation(() => 0.7)
+		board.cells[3].linkBlock(new Block(board.element))
+		board.moveLeft()
+
+		expect(board.cells[0].isEmpty()).toBe(false)
+		expect(board.cells[1].isEmpty()).toBe(false)
+		expect(board.cells[2].isEmpty()).toBe(true)
+		expect(board.cells[3].isEmpty()).toBe(true)
+	})
 })
