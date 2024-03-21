@@ -20,6 +20,9 @@ export default class GameBoard {
 			if (event.key === 'ArrowRight') {
 				this.moveRight()
 			}
+			if (event.key === 'ArrowLeft') {
+				this.moveLeft()
+			}
 		})
 	}
 
@@ -57,6 +60,42 @@ export default class GameBoard {
 
 				if (rightCell.linkedBlock.value === currentBlock.value) {
 					rightCell.linkBlock(currentBlock)
+					currentBlock.setValue(currentBlock.value * 2)
+					currentCell.disconnectBlock()
+					isStepMoved = true
+				}
+			}
+
+			if (isStepMoved) isMoved = true
+		} while (isStepMoved)
+
+		if (isMoved) this.addBlock()
+	}
+
+	moveLeft() {
+		let isStepMoved = false
+		let isMoved = false
+
+		do {
+			isStepMoved = false
+
+			for(let i = 0; i < this.cells.length; i++) {
+				const currentCell = this.cells[i]
+				if (currentCell.isEmpty()) continue;
+				if (currentCell.x === 0) continue;
+
+				const currentBlock = currentCell.linkedBlock
+				const leftCell = this.cells[i-1]
+
+				if (leftCell.isEmpty()) {
+					leftCell.linkBlock(currentBlock)
+					currentCell.disconnectBlock()
+					isStepMoved = true
+					continue
+				}
+
+				if (leftCell.linkedBlock.value === currentBlock.value) {
+					leftCell.linkBlock(currentBlock)
 					currentBlock.setValue(currentBlock.value * 2)
 					currentCell.disconnectBlock()
 					isStepMoved = true

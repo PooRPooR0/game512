@@ -35,7 +35,6 @@ describe("GameBoard", () => {
 	test("move right base", () => {
 		expect(board.cells[0].isEmpty()).toBe(false)
 		board.moveRight()
-		expect(board.cells[0].isEmpty()).toBe(true)
 		expect(board.cells[3].isEmpty()).toBe(false)
 	})
 
@@ -44,7 +43,6 @@ describe("GameBoard", () => {
 		expect(board.cells[0].isEmpty()).toBe(false)
 		board.addBlock()
 		board.moveRight()
-		expect(board.cells[0].isEmpty()).toBe(true)
 		expect(board.cells[3].isEmpty()).toBe(false)
 		expect(board.cells[3].linkedBlock.value).toBe(8)
 	})

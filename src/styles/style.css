@@ -58,4 +58,11 @@ body {
     font-size: 28px;
     color: #1a1a1a;
     transition: 0.2s ease-in-out;
+    animation: fade-in ease-out 0.2s;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
 }
