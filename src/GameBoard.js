@@ -65,6 +65,7 @@ export default class GameBoard {
 				}
 
 				if (rightCell.linkedBlock.value === currentBlock.value) {
+					rightCell.linkedBlock.delete()
 					rightCell.linkBlock(currentBlock)
 					currentBlock.setValue(currentBlock.value * 2)
 					currentCell.disconnectBlock()
@@ -101,6 +102,7 @@ export default class GameBoard {
 				}
 
 				if (leftCell.linkedBlock.value === currentBlock.value) {
+					leftCell.linkedBlock.delete()
 					leftCell.linkBlock(currentBlock)
 					currentBlock.setValue(currentBlock.value * 2)
 					currentCell.disconnectBlock()
@@ -137,6 +139,7 @@ export default class GameBoard {
 				}
 
 				if (topCell.linkedBlock.value === currentBlock.value) {
+					topCell.linkedBlock.delete()
 					topCell.linkBlock(currentBlock)
 					currentBlock.setValue(currentBlock.value * 2)
 					currentCell.disconnectBlock()
@@ -173,6 +176,7 @@ export default class GameBoard {
 				}
 
 				if (bottomCell.linkedBlock.value === currentBlock.value) {
+					bottomCell.linkedBlock.delete()
 					bottomCell.linkBlock(currentBlock)
 					currentBlock.setValue(currentBlock.value * 2)
 					currentCell.disconnectBlock()

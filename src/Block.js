@@ -21,4 +21,8 @@ export default class Block {
 		this.element.textContent = `${this.value}`
 		this.element.style.setProperty('--bright', 100 - Math.log2(+this.value) * 4.5)
 	}
+
+	delete() {
+		this.element.remove()
+	}
 }
