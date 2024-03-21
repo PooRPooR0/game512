@@ -163,4 +163,56 @@ describe("GameBoard", () => {
 		expect(board.cells[8].isEmpty()).toBe(true)
 		expect(board.cells[12].isEmpty()).toBe(true)
 	})
+
+	/*
+	* [4 0 0 0]  [0 0 0 0]
+	* [0 0 0 0]  [0 0 0 0]
+	* [0 0 0 0]->[0 0 0 0]
+	* [0 0 0 0]  [4 0 0 0]
+	*
+	* */
+	test("move bottom base", () => {
+		expect(board.cells[0].isEmpty()).toBe(false)
+		board.moveBottom()
+		expect(board.cells[12].isEmpty()).toBe(false)
+	})
+
+	/*
+	* [4 0 0 0]  [0 0 0 0]
+	* [0 0 0 0]  [0 0 0 0]
+	* [0 0 0 0]->[0 0 0 0]
+	* [4 0 0 0]  [8 0 0 0]
+	*
+	* */
+	test("move bottom merge", () => {
+		const blockToMove = board.cells[0].linkedBlock
+		board.cells[12].linkBlock(blockToMove)
+		board.cells[0].disconnectBlock()
+
+		board.addBlock()
+		board.moveBottom()
+
+		expect(board.cells[12].isEmpty()).toBe(false)
+		expect(board.cells[12].linkedBlock.value).toBe(8)
+	})
+
+	/*
+	* [2 0 0 0]  [0 0 0 0]
+	* [4 0 0 0]  [0 0 0 0]
+	* [0 0 0 0]->[2 0 0 0]
+	* [0 0 0 0]  [4 0 0 0]
+	*
+	* */
+	test("move bottom several", () => {
+		const blockToMove = board.cells[0].linkedBlock
+		board.cells[4].linkBlock(blockToMove)
+		board.cells[0].disconnectBlock()
+
+		spy.mockImplementation(() => 0.7)
+		board.cells[0].linkBlock(new Block(board.element))
+		board.moveBottom()
+
+		expect(board.cells[8].isEmpty()).toBe(false)
+		expect(board.cells[12].isEmpty()).toBe(false)
+	})
 })
