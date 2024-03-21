@@ -1,5 +1,6 @@
 import GameBoard from "../GameBoard.js";
 import {expect, describe, test, beforeEach, vi, afterEach} from "vitest";
+import Block from "../Block.js";
 
 let board;
 let spy;
@@ -52,7 +53,7 @@ describe("GameBoard", () => {
 	test("move right several", () => {
 		expect(board.cells[0].isEmpty()).toBe(false)
 		spy.mockImplementation(() => 0.7)
-		board.addBlock()
+		board.cells[1].linkBlock(new Block(board.element))
 		board.moveRight()
 		expect(board.cells[0].isEmpty()).toBe(true)
 		expect(board.cells[2].isEmpty()).toBe(false)

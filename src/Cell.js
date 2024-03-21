@@ -5,6 +5,7 @@ export default class Cell {
 		this.linkedBlock = null
 
 		this.element = document.createElement("div")
+		this.element.textContent = `${this.x} ${this.y}`
 		this.element.classList.add('cell')
 		gridElement.append(this.element)
 	}
@@ -16,5 +17,9 @@ export default class Cell {
 	linkBlock(block) {
 		this.linkedBlock = block
 		this.linkedBlock.setPosition(this.x, this.y)
+	}
+
+	disconnectBlock() {
+		this.linkedBlock = null
 	}
 }
