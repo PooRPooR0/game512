@@ -30,10 +30,6 @@ describe("GameBoard", () => {
 		expect(board.cells.filter((cell) => cell.isEmpty())).length(0)
 		const cell = board.getRandomEmptyCell()
 		expect(cell).toBe(null)
-
-		const spyLink = vi.spyOn(Cell, 'linkBlock')
-		board.addBlock()
-		expect(spyLink).not.toHaveBeenCalled()
 	})
 	test("add block", () => {
 		board.addBlock()

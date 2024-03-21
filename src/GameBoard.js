@@ -40,12 +40,14 @@ export default class GameBoard {
 
 	getRandomEmptyCell() {
 		const emptyCells = this.cells.filter(cell => cell.isEmpty())
+		if (emptyCells.length === 0) return null
 		const randNum = Math.floor(Math.random() * emptyCells.length)
 		return emptyCells[randNum]
 	}
 
 	addBlock() {
-		this.getRandomEmptyCell().linkBlock(new Block(this.element))
+		const randomCell = this.getRandomEmptyCell()
+		if (!!randomCell) randomCell.linkBlock(new Block(this.element))
 	}
 
 	moveRight() {
