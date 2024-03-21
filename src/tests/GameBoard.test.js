@@ -101,4 +101,66 @@ describe("GameBoard", () => {
 		expect(board.cells[2].isEmpty()).toBe(true)
 		expect(board.cells[3].isEmpty()).toBe(true)
 	})
+
+	// move top tests
+
+	/*
+	* [0 0 0 0]  [4 0 0 0]
+	* [0 0 0 0]  [0 0 0 0]
+	* [0 0 0 0]->[0 0 0 0]
+	* [4 0 0 0]  [0 0 0 0]
+	*
+	* */
+	test("move top base", () => {
+		const blockToMove = board.cells[0].linkedBlock
+		board.cells[12].linkBlock(blockToMove)
+		board.cells[0].disconnectBlock()
+
+		expect(board.cells[12].isEmpty()).toBe(false)
+		board.moveTop()
+		expect(board.cells[12].isEmpty()).toBe(true)
+		expect(board.cells[0].isEmpty()).toBe(false)
+	})
+
+	/*
+	* [4 0 0 0]  [8 0 0 0]
+	* [0 0 0 0]  [0 0 0 0]
+	* [0 0 0 0]->[0 0 0 0]
+	* [4 0 0 0]  [0 0 0 0]
+	*
+	* */
+	test("move top merge", () => {
+		const blockToMove = board.cells[0].linkedBlock
+		board.cells[12].linkBlock(blockToMove)
+		board.cells[0].disconnectBlock()
+
+		board.addBlock()
+		board.moveTop()
+
+		expect(board.cells[0].isEmpty()).toBe(false)
+		expect(board.cells[12].isEmpty()).toBe(true)
+		expect(board.cells[0].linkedBlock.value).toBe(8)
+	})
+
+	/*
+	* [0 0 0 0]  [2 0 0 0]
+	* [0 0 0 0]  [4 0 0 0]
+	* [2 0 0 0]->[0 0 0 0]
+	* [4 0 0 0]  [0 0 0 0]
+	*
+	* */
+	test("move top several", () => {
+		const blockToMove = board.cells[0].linkedBlock
+		board.cells[12].linkBlock(blockToMove)
+		board.cells[0].disconnectBlock()
+
+		spy.mockImplementation(() => 0.7)
+		board.cells[8].linkBlock(new Block(board.element))
+		board.moveTop()
+
+		expect(board.cells[0].isEmpty()).toBe(false)
+		expect(board.cells[4].isEmpty()).toBe(false)
+		expect(board.cells[8].isEmpty()).toBe(true)
+		expect(board.cells[12].isEmpty()).toBe(true)
+	})
 })
