@@ -20,6 +20,7 @@ export default class Block {
 		this.value = value
 		this.element.textContent = `${this.value}`
 		this.element.style.setProperty('--bright', 100 - Math.log2(+this.value) * 4.5)
+		if (+value === 512) alert("Victory! 512")
 	}
 
 	delete() {
