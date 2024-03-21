@@ -85,6 +85,7 @@ export default class GameBoard {
 		} while (isStepMoved)
 
 		if (isMoved) this.addBlock()
+		this.checkLose()
 	}
 
 	moveLeft() {
@@ -122,6 +123,7 @@ export default class GameBoard {
 		} while (isStepMoved)
 
 		if (isMoved) this.addBlock()
+		this.checkLose()
 	}
 
 	moveTop() {
@@ -159,6 +161,7 @@ export default class GameBoard {
 		} while (isStepMoved)
 
 		if (isMoved) this.addBlock()
+		this.checkLose()
 	}
 
 	moveBottom() {
@@ -196,5 +199,26 @@ export default class GameBoard {
 		} while (isStepMoved)
 
 		if (isMoved) this.addBlock()
+		this.checkLose()
+	}
+
+	checkLose() {
+		const cell = this.getRandomEmptyCell()
+		if (!!cell) return
+
+		for(let i = 0; i < this.cells.length; i++) {
+			const currentCell = this.cells[i]
+			const leftCell = this.cells[i - 1]
+			const topCell = this.cells[i - 4]
+			const rigthCell = this.cells[i+1]
+			const botCell = this.cells[i+4]
+
+			if (leftCell && leftCell?.linkedBlock?.value === currentCell.linkedBlock.value) return
+			if (topCell && topCell?.linkedBlock?.value === currentCell.linkedBlock.value) return
+			if (rigthCell && rigthCell?.linkedBlock?.value === currentCell.linkedBlock.value) return
+			if (botCell && botCell?.linkedBlock?.value === currentCell.linkedBlock.value) return
+		}
+
+		alert("You Lose! Refresh to play again")
 	}
 }
