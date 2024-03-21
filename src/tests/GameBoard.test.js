@@ -1,7 +1,6 @@
 import GameBoard from "../GameBoard.js";
 import {expect, describe, test, beforeEach, vi, afterEach} from "vitest";
 import Block from "../Block.js";
-import Cell from "../Cell.js";
 
 let board;
 let spy;
