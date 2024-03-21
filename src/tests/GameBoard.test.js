@@ -1,6 +1,7 @@
 import GameBoard from "../GameBoard.js";
 import {expect, describe, test, beforeEach, vi, afterEach} from "vitest";
 import Block from "../Block.js";
+import Cell from "../Cell.js";
 
 let board;
 let spy;
@@ -23,6 +24,16 @@ describe("GameBoard", () => {
 	test("get empty cell", () => {
 		const cell = board.getRandomEmptyCell()
 		expect(cell.isEmpty()).toBe(true)
+	})
+	test("get empty cell 2 (check lose)", () => {
+		for (let i = 0; i < 15; i++) board.addBlock()
+		expect(board.cells.filter((cell) => cell.isEmpty())).length(0)
+		const cell = board.getRandomEmptyCell()
+		expect(cell).toBe(null)
+
+		const spyLink = vi.spyOn(Cell, 'linkBlock')
+		board.addBlock()
+		expect(spyLink).not.toHaveBeenCalled()
 	})
 	test("add block", () => {
 		board.addBlock()
